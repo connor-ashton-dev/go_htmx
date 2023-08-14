@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- htmx script -->
+    <script
+      src="https://unpkg.com/htmx.org@1.9.4"
+      integrity="sha384-zUfuhFKKZCbHTY6aRR46gxiqszMk5tcHjsVFxnUo8VMus4kHGVdIYVbOYYNlKmHV"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <h1>Movie List</h1>
+
+    <ul id="film-list">
+      {{range .Films}}
+
+      <li>{{.Title}}: {{.Director}}</li>
+
+      {{end}}
+    </ul>
+
+    <form
+      hx-post="/add-film/"
+      hx-target="#film-list"
+      hx-swap="beforeend"
+      hx-indicator="#spinner"
+    >
+      <h2>Add Film</h2>
+      <input type="text" name="title" id="file-title" placeholder="Title" />
+      <input
+        type="text"
+        name="director"
+        id="film-director"
+        placeholder="Director"
+      />
+      <p class="htmx-indicator" id="spinner">Loading ...</p>
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>
